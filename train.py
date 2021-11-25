@@ -3,6 +3,7 @@ from torchvision import transforms
 from torch.optim.adam import Adam
 from torch.optim.optimizer import Optimizer
 from torch.utils.data.dataset import Dataset
+from torchvision.transforms.autoaugment import AutoAugmentPolicy
 import utils
 from dataset import ImageDataSet
 from model import CaptchaRecModel
@@ -114,6 +115,7 @@ if __name__ == "__main__":
             transforms.Grayscale(),
         ]
     )
+
     train_dataset = ImageDataSet(args.train_folder, transform=tfs)
     test_dataset = ImageDataSet(args.test_folder, transform=tfs)
     train_data_loader = torch.utils.data.DataLoader(
@@ -135,4 +137,4 @@ for i in range(0, args.epochs_count):
     train(model, opt, train_data_loader)
     test_val = validate(model, test_data_loader)
     print(f"Test accuracy: {test_val}")
-    torch.save(model.state_dict(), "last_model.pkl")
+    torch.save(model.state_dict(), "last_model2.pkl")
